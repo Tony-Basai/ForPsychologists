@@ -1,3 +1,46 @@
+const burger = document.getElementById("burger");
+const menu = document.querySelector(".nav-container__items");
+
+function toggleMenu(force) {
+  const isOpen = typeof force === "boolean"
+    ? force
+    : !menu.classList.contains("active");
+
+  burger.classList.toggle("active", isOpen);
+  menu.classList.toggle("active", isOpen);
+  document.body.classList.toggle("no-scroll", isOpen);
+}
+
+burger.addEventListener("click", () => toggleMenu());
+
+menu.addEventListener("click", (e) => {
+  if (e.target.closest(".nav-container-items-list__page-link")) {
+    toggleMenu(false);
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (
+    menu.classList.contains("active") &&
+    !menu.contains(e.target) &&
+    !burger.contains(e.target)
+  ) {
+    toggleMenu(false);
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    toggleMenu(false);
+  }
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 768) {
+    toggleMenu(false);
+  }
+});
+
 const questions = [
 {
 q: "Вопрос 1: Какое утверждение отражает суть конструктивного риска?",
@@ -358,11 +401,12 @@ const swiper = new Swiper(".main-sand-swiper", {
     autoplay: {
         delay: 10000,
         disableOnInteraction: false,
+        pauseOnMouseEnter: true,
     },
 
     keyboard: {
         enabled: true,
-        onlyInViewport: true,
+        onlyInViewport: false,
         pageUpDown: true, 
     },
 
@@ -379,25 +423,39 @@ const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 const closeBtn = document.querySelector(".lightbox__close");
 
+function openLightbox(src) {
+  lightbox.classList.add("active");
+  lightboxImg.src = src;
+
+  const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+  document.body.style.overflow = "hidden";
+  document.body.style.paddingRight = scrollBarWidth + "px";
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("active");
+
+  document.body.style.overflow = "";
+  document.body.style.paddingRight = "";
+}
+
 images.forEach(img => {
   img.addEventListener("click", () => {
-    lightbox.classList.add("active");
-    lightboxImg.src = img.src;
+    openLightbox(img.src);
   });
 });
 
-closeBtn.addEventListener("click", () => {
-  lightbox.classList.remove("active");
-});
+closeBtn.addEventListener("click", closeLightbox);
 
 lightbox.addEventListener("click", (e) => {
   if (e.target === lightbox) {
-    lightbox.classList.remove("active");
+    closeLightbox();
   }
 });
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
-    lightbox.classList.remove("active");
+    closeLightbox();
   }
 });
