@@ -941,9 +941,41 @@
             </div>
 
     </main>
-    <footer>
+    <footer class="footer">
+        <div class="footer__container">
+            <p class="footer-container__copy">
+                &copy; <span id="current-year"></span> Tony Basai — Frontend Developer
+            </p>
 
+            <div class="footer-container__items">
+                <nav class="footer-container-items__nav">
+                    <a class="footer-container-items-nav__page-link" href="#hero">Главная</a>
+                    <a class="footer-container-items-nav__page-link" href="#lectures">Лекции</a>
+                    <a class="footer-container-items-nav__page-link" href="#art-therapy">Арт-терапия</a>
+                    <a class="footer-container-items-nav__page-link" href="#sand-therapy">Песочная терапия</a>
+                    <a class="footer-container-items-nav__page-link" href="#meditation">Медитация</a>
+                    <a class="footer-container-items-nav__page-link" href="#music-therapy">Музыка-терапия</a>
+                    <a class="footer-container-items-nav__page-link" href="#anti-stress-toys">Игрушки-антистресс</a>
+                    <a class="footer-container-items-nav__page-link" href="#useful-activity">Полезные активности</a>
+                </nav>
+            </div>
+            <div class="footer-container__contact">
+                <a class="footer-container-contact__phone-number" href="tel:+80152312567">+80152 31-25-67</a>
+                <a class="footer-container-contact__telegram" 
+                    href="https://t.me/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                >
+                    <svg class="footer-container-contact__link-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" >
+                        <path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
     </footer>
+    <script>
+        document.getElementById('current-year').innerText = new Date().getFullYear();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 </html>
